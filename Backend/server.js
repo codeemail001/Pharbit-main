@@ -3,6 +3,15 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 
+// Catch silent crashes
+process.on("uncaughtException", (err) => {
+  console.error("🔥 CRITICAL: Uncaught Exception:", err);
+});
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("🔥 CRITICAL: Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+dotenv.config();
 
 import Organization from "./Routes/Users/Organization.js"
 import Autherization from "./Routes/Users/Auth.js"
@@ -20,7 +29,6 @@ import FreezeBatch from "./Routes/Batches/FreezingBatch.js"
 import PackageOrder from "./Routes/Batches/PackingOrder.js"
 import AdminControls from "./Routes/Admin/AdminControls.js"
 import Permissions from "./Routes/Users/Permissions.js"
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4500;
@@ -45,7 +53,7 @@ app.use(cors({
   },
   credentials: true
 }));
-// Only parse JSON
+
 app.use(express.json({ type: "application/json" }));
 app.use(express.urlencoded({ extended: true }));
 
