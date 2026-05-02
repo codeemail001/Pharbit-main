@@ -3,41 +3,36 @@ import supabase from "./DatabaseConnect.js";
 export const getAuthUser = async (req) => {
   try {
     const authHeader = req.headers.authorization;
+    const cookieToken = req.cookies?.Pharbit_Token;
     let token = null;
-    
+
     if (authHeader && authHeader.startsWith("Bearer ")) {
       token = authHeader.split(" ")[1];
-      // Explicitly check for stringified null values from frontend
-      if (token === "null" || token === "undefined") {
-        token = null;
-      }
-    }
-    
-    // Fallback to Cookie if header is missing
-    if (!token) {
-      token = req.cookies?.Pharbit_Token;
+    } else if (cookieToken) {
+      token = cookieToken;
     }
 
-    // Final cleanup
-    if (token === "null" || token === "undefined") {
-      token = null;
+    // Explicitly reject stringified "null"/"undefined"
+    if (!token || token === "null" || token === "undefined" || token === "") {
+      console.log(`📡 Auth [${req.method} ${req.url}] - ❌ No Token Found`);
+      throw new Error("No token provided");
     }
 
-    console.log(`📡 Auth Check [${req.method} ${req.url}] - Token Found: ${!!token}`);
-    
-    if (!token) {
-      throw new Error("Unauthorized: No valid token provided");
-    }
+    console.log(`📡 Auth [${req.method} ${req.url}] - ✅ Token Found (${token.substring(0, 10)}...)`);
 
     const { data, error } = await supabase.auth.getUser(token);
     
     if (error || !data.user) {
-      throw new Error(`Unauthorized: ${error?.message || "User not found"}`);
+      console.error(`📡 Auth [${req.method} ${req.url}] - ❌ Supabase Rejected Token:`, error?.message || "User missing");
+      throw new Error("Invalid token");
     }
 
     return data.user;
   } catch (err) {
-    console.error(`🔒 Auth Error [${req.method} ${req.url}]:`, err.message);
+    // Only log actual errors, not missing tokens (which is normal for public routes)
+    if (err.message !== "No token provided") {
+      console.error(`🔒 Auth Middleware Error:`, err.message);
+    }
     throw err;
   }
 };
