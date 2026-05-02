@@ -4,7 +4,8 @@ import { SearchIcon } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import "../../Styles/Home/home.css";
 
-const url = import.meta.env.VITE_API_URL;
+const rawUrl = import.meta.env.VITE_API_URL || "";
+const url = rawUrl.startsWith("http") ? rawUrl : `https://${rawUrl}`;
 const HomeSearch = () => {
   const [query, setQuery] = useState('');
   const [meds, setMeds] = useState([]);

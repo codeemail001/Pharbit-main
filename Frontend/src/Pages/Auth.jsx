@@ -7,7 +7,8 @@ import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 
-const url = import.meta.env.VITE_API_URL;
+const rawUrl = import.meta.env.VITE_API_URL || "";
+const url = rawUrl.startsWith("http") ? rawUrl : `https://${rawUrl}`;
 export default function Auth() {
   const navigate = useNavigate();
 
