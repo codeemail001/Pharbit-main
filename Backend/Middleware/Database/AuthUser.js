@@ -1,20 +1,45 @@
 import supabase from "./DatabaseConnect.js";
 
 export const getAuthUser = async (req) => {
-  const authHeader = req.headers.authorization;
-  let token = (authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null) || req.cookies?.Pharbit_Token;
-  
-  // Clean up stringified "null" or "undefined"
-  if (token === "null" || token === "undefined") token = null;
+  try {
+    // 1. Check Authorization Header (Bearer Token)
+    const authHeader = req.headers.authorization;
+    let token = null;
+    
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    }
+    
+    // 2. Fallback to Cookie
+    if (!token || token === "null" || token === "undefined") {
+      token = req.cookies?.Pharbit_Token;
+    }
 
-  console.log("Auth Check - Token Present:", !!token);
-  if (!token) {
-    console.log("No token found. Cookies:", Object.keys(req.cookies || {}));
-    throw new Error("Unauthorized");
+    // 3. Clean up
+    if (token === "null" || token === "undefined") {
+      token = null;
+    }
+
+    console.log("📡 Auth Check - Token Present:", !!token);
+    
+    if (!token) {
+      console.log("❌ No token found in headers or cookies.");
+      throw new Error("Unauthorized");
+    }
+
+    // 4. Verify with Supabase
+    const { data, error } = await supabase.auth.getUser(token);
+    
+    if (error || !data.user) {
+      console.error("❌ Supabase Auth Error:", error?.message || "User not found");
+      throw new Error("Unauthorized");
+    }
+
+    return data.user;
+  } catch (err) {
+    console.error("🔒 Auth Middleware Error:", err.message);
+    throw err;
   }
-  const { data, error } = await supabase.auth.getUser(token);
-  if (error) throw error;
-  return data.user;
 };
 
 
@@ -26,7 +51,6 @@ export const FindUser = async (userId) => {
     .single();
 
   if (error) throw error;
-  console.log(data);
   return data;
 };
 
@@ -36,7 +60,7 @@ export const FindRole = async (userId) => {
     .from("employees")
     .select("role")
     .eq("auth_id", userId)
-    .order("created_at", { ascending: false }); // Get the most recent role first
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error("FindRole DB Error:", error);
@@ -44,16 +68,10 @@ export const FindRole = async (userId) => {
   }
 
   if (!data || data.length === 0) {
-    console.warn("FindRole: No role found for user", userId);
     return null;
   }
 
-  // If multiple roles exist, log a warning but continue with the most recent one
-  if (data.length > 1) {
-    console.warn(`FindRole: Multiple roles (${data.length}) found for user ${userId}. Using most recent: ${data[0].role}`);
-  }
-
-  return data[0]; // Return the first (most recent) result
+  return data[0]; 
 };
 
 
@@ -64,7 +82,7 @@ export const FindOrganization = async (userId) => {
       .select("organization_id , role ")
       .eq("auth_id", userId)
       .single();
-    console.log(employee);
+
     if (empError || !employee) {
       return {
         success: false,
