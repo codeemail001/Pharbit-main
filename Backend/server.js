@@ -58,6 +58,12 @@ app.use(cors({
 app.use(express.json({ type: "application/json" }));
 app.use(express.urlencoded({ extended: true }));
 
+// --- REQUEST LOGGER ---
+app.use((req, res, next) => {
+  console.log(`📡 Incoming Request: ${req.method} ${req.url}`);
+  next();
+});
+
 // --- HEALTH CHECKS (MUST BE AT TOP) ---
 app.get("/", (req, res) => {
   console.log("Health check hit at /");
