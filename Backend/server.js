@@ -66,6 +66,10 @@ app.use("/", PackageOrder)
 app.use("/admin", AdminControls);
 app.use("/", Permissions);
 
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", message: "Pharbit API is live" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
