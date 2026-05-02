@@ -1,7 +1,7 @@
 import { Worker } from "bullmq";
 import { ethers } from "ethers";
 import dotenv from "dotenv";
-import abi from "../abi/Pharbit.json" assert { type: "json" };
+import abi from "../abi/Pharbit.json" with { type: "json" };
 
 import { redisConnection } from "../Queue/redis.js";
 import { ReturnShipment } from "../Database/Transfer/Shipment/ReturnShipment.js";

@@ -1,7 +1,7 @@
 import express from "express";
 import { ethers } from "ethers";
 import dotenv from "dotenv";
-import abi from "../../abi/Pharbit.json" assert { type: "json" };
+import abi from "../../abi/Pharbit.json" with { type: "json" };
 import { getAuthUser, FindRole } from "../../Middleware/Database/AuthUser.js";
 
 dotenv.config();

@@ -4,7 +4,7 @@ import supabase from "../../../Middleware/Database/DatabaseConnect.js";
 import { createShipmentLog } from "./Logs/CreateShipmentLog.js";
 import { decrypt } from "../../../Middleware/Database/EncryptDecrypt.js";
 import { OrgDetails } from "../../Users/Organization/FindOrganization.js";
-import abi from "../../../abi/Pharbit.json" assert { type: "json" };
+import abi from "../../../abi/Pharbit.json" with { type: "json" };
 
 dotenv.config();
 

@@ -3,7 +3,7 @@ import { redisConnection } from "../Queue/redis.js";
 
 import { ethers } from "ethers";
 import dotenv from "dotenv";
-import abi from "../abi/Pharbit.json" assert { type: "json" };
+import abi from "../abi/Pharbit.json" with { type: "json" };
 
 import { OrgDetails } from "../Database/Users/Organization/FindOrganization.js";
 import { decrypt } from "../Middleware/Database/EncryptDecrypt.js";
