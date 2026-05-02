@@ -2,8 +2,11 @@ import supabase from "./DatabaseConnect.js";
 
 export const getAuthUser = async (req) => {
   const authHeader = req.headers.authorization;
-  const token = (authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null) || req.cookies?.Pharbit_Token;
+  let token = (authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null) || req.cookies?.Pharbit_Token;
   
+  // Clean up stringified "null" or "undefined"
+  if (token === "null" || token === "undefined") token = null;
+
   console.log("Auth Check - Token Present:", !!token);
   if (!token) {
     console.log("No token found. Cookies:", Object.keys(req.cookies || {}));

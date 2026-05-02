@@ -19,12 +19,11 @@ const HomeSearch = () => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("Pharbit_Token");
-        const res = await fetch(`${url}/auth/me`, { 
-          credentials: "include",
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
-        });
+        const headers = { "credentials": "include" };
+        if (token) {
+          headers.headers = { "Authorization": `Bearer ${token}` };
+        }
+        const res = await fetch(`${url}/auth/me`, headers);
         const data = await res.json();
         if (data && data.employee) {
           setUser(data.employee);
@@ -50,12 +49,11 @@ const HomeSearch = () => {
     const fetchMeds = async () => {
       try {
         const token = localStorage.getItem("Pharbit_Token");
-        const res = await fetch(`${url}/allmeds`, {
-          credentials: 'include',
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
-        });
+        const options = { credentials: 'include' };
+        if (token) {
+          options.headers = { "Authorization": `Bearer ${token}` };
+        }
+        const res = await fetch(`${url}/allmeds`, options);
         const response = await res.json();
         if (response.success) {
           // The backend returns { success: true, data: [...] }
