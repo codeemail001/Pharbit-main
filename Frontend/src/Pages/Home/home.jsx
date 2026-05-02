@@ -16,20 +16,27 @@ const HomeSearch = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUser = async (retries = 3) => {
       try {
         const token = localStorage.getItem("Pharbit_Token");
-        const headers = { "credentials": "include" };
+        const options = { "credentials": "include" };
         if (token) {
-          headers.headers = { "Authorization": `Bearer ${token}` };
+          options.headers = { "Authorization": `Bearer ${token}` };
         }
-        const res = await fetch(`${url}/auth/me`, headers);
+        
+        const res = await fetch(`${url}/auth/me`, options);
         const data = await res.json();
+        
         if (data && data.employee) {
           setUser(data.employee);
+        } else if (retries > 0) {
+          console.log(`Auth retry remaining: ${retries}`);
+          setTimeout(() => fetchUser(retries - 1), 1000);
         }
       } catch (err) {
-        console.error("Not logged in");
+        if (retries > 0) {
+          setTimeout(() => fetchUser(retries - 1), 1000);
+        }
       }
     };
     fetchUser();
@@ -46,7 +53,7 @@ const HomeSearch = () => {
   };
 
   useEffect(() => {
-    const fetchMeds = async () => {
+    const fetchMeds = async (retries = 3) => {
       try {
         const token = localStorage.getItem("Pharbit_Token");
         const options = { credentials: 'include' };
@@ -56,11 +63,14 @@ const HomeSearch = () => {
         const res = await fetch(`${url}/allmeds`, options);
         const response = await res.json();
         if (response.success) {
-          // The backend returns { success: true, data: [...] }
           setMeds(response.data || []);
+        } else if (retries > 0) {
+          setTimeout(() => fetchMeds(retries - 1), 1000);
         }
       } catch (error) {
-        console.error("Error fetching meds:", error);
+        if (retries > 0) {
+          setTimeout(() => fetchMeds(retries - 1), 1000);
+        }
       }
     };
     fetchMeds();
