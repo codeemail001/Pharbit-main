@@ -31,7 +31,8 @@ import AdminControls from "./Routes/Admin/AdminControls.js"
 import Permissions from "./Routes/Users/Permissions.js"
 
 const app = express();
-const PORT = process.env.PORT || 4500;
+// Force 4500 to match your Railway domain settings
+const PORT = process.env.NODE_ENV === "production" ? 4500 : (process.env.PORT || 4500);
 
 app.use(cookieParser());
 
