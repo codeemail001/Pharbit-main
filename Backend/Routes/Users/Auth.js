@@ -32,8 +32,8 @@ router.post("/auth/login", async (req, res) => {
     const { user, session } = data;
     res.cookie("Pharbit_Token", session.access_token, {
       httpOnly: true,
-      secure: false, 
-      sameSite: "lax",
+      secure: true, 
+      sameSite: "none",
       maxAge: 60 * 60 * 1000,
       path: "/"
     });
@@ -102,8 +102,8 @@ router.post("/auth/signup", async (req, res) => {
 
     res.cookie("Pharbit_Token", loginData.session.access_token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000,
       path: "/"
     });
@@ -151,8 +151,8 @@ router.post("/auth/logout", async (req, res) => {
 
     res.clearCookie("Pharbit_Token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       path: "/"
     });
 
