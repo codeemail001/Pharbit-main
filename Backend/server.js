@@ -1,5 +1,4 @@
 import express from "express";
-console.log("🚀 FILE LOADED: Auth.js is being executed!");
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -66,29 +65,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// --- HEALTH CHECKS (MUST BE AT TOP) ---
+// --- HEALTH CHECKS ---
 app.get("/", (req, res) => {
-  console.log("Health check hit at /");
   res.status(200).send("Pharbit API is running...");
 });
 
 app.get("/health", (req, res) => {
-  console.log("Health check hit at /health");
   res.json({ status: "ok", port: PORT, env: process.env.NODE_ENV });
 });
 
-app.get("/auth/manual-test", (req, res) => {
-  res.json({ message: "Manual Auth Test in server.js is working!" });
-});
-
-// --- PRIMARY ROUTERS (MUST BE BEFORE OTHERS) ---
-console.log("DEBUG: Registering AuthRouter...");
+// --- ROUTES ---
 app.use("/", AuthRouter);
-
-console.log("Attempting to start server...");
-console.log("PORT:", PORT);
-// ---------------------------------------
-
 app.use("/", Organization);
 app.use("/", Employee)
 app.use("/", Medicines);
@@ -106,5 +93,5 @@ app.use("/admin", AdminControls);
 app.use("/", Permissions);
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server strictly listening on 0.0.0.0:${PORT}`);
+  console.log(`🚀 Pharbit Server Live on Port ${PORT}`);
 });

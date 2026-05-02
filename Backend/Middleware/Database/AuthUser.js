@@ -2,42 +2,42 @@ import supabase from "./DatabaseConnect.js";
 
 export const getAuthUser = async (req) => {
   try {
-    // 1. Check Authorization Header (Bearer Token)
     const authHeader = req.headers.authorization;
     let token = null;
     
     if (authHeader && authHeader.startsWith("Bearer ")) {
       token = authHeader.split(" ")[1];
+      // Explicitly check for stringified null values from frontend
+      if (token === "null" || token === "undefined") {
+        token = null;
+      }
     }
     
-    // 2. Fallback to Cookie
-    if (!token || token === "null" || token === "undefined") {
+    // Fallback to Cookie if header is missing
+    if (!token) {
       token = req.cookies?.Pharbit_Token;
     }
 
-    // 3. Clean up
+    // Final cleanup
     if (token === "null" || token === "undefined") {
       token = null;
     }
 
-    console.log("📡 Auth Check - Token Present:", !!token);
+    console.log(`📡 Auth Check [${req.method} ${req.url}] - Token Found: ${!!token}`);
     
     if (!token) {
-      console.log("❌ No token found in headers or cookies.");
-      throw new Error("Unauthorized");
+      throw new Error("Unauthorized: No valid token provided");
     }
 
-    // 4. Verify with Supabase
     const { data, error } = await supabase.auth.getUser(token);
     
     if (error || !data.user) {
-      console.error("❌ Supabase Auth Error:", error?.message || "User not found");
-      throw new Error("Unauthorized");
+      throw new Error(`Unauthorized: ${error?.message || "User not found"}`);
     }
 
     return data.user;
   } catch (err) {
-    console.error("🔒 Auth Middleware Error:", err.message);
+    console.error(`🔒 Auth Error [${req.method} ${req.url}]:`, err.message);
     throw err;
   }
 };
@@ -62,16 +62,8 @@ export const FindRole = async (userId) => {
     .eq("auth_id", userId)
     .order("created_at", { ascending: false });
 
-  if (error) {
-    console.error("FindRole DB Error:", error);
-    throw error;
-  }
-
-  if (!data || data.length === 0) {
-    return null;
-  }
-
-  return data[0]; 
+  if (error) throw error;
+  return data?.[0] || null;
 };
 
 
@@ -79,15 +71,12 @@ export const FindOrganization = async (userId) => {
   try {
     const { data: employee, error: empError } = await supabase
       .from("employees")
-      .select("organization_id , role ")
+      .select("organization_id, role")
       .eq("auth_id", userId)
       .single();
 
     if (empError || !employee) {
-      return {
-        success: false,
-        error: "User not linked to any organization"
-      };
+      return { success: false, error: "User not linked to any organization" };
     }
 
     const { data: organization, error: orgError } = await supabase
@@ -97,10 +86,7 @@ export const FindOrganization = async (userId) => {
       .single();
 
     if (orgError || !organization) {
-      return {
-        success: false,
-        error: "Organization details not found"
-      };
+      return { success: false, error: "Organization details not found" };
     }
 
     return {
@@ -109,10 +95,7 @@ export const FindOrganization = async (userId) => {
       role: employee.role
     };
   } catch (err) {
-    console.error("FindOrganization unexpected error:", err);
-    return {
-      success: false,
-      error: "Internal error fetching organization"
-    };
+    console.error("FindOrganization Error:", err.message);
+    return { success: false, error: "Internal error fetching organization" };
   }
 };
