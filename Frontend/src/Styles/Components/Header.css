@@ -1,0 +1,253 @@
+/* --- Header Layout --- */
+.profile-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 35px;
+  width: 100%;
+}
+
+.header-left-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* Gap between search and add button */
+}
+
+/* --- Search Bar with Slim Light Blue Border --- */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 320px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-wrapper:focus-within {
+  width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.profile-header-search {
+  width: 100%;
+  padding: 13px 20px 13px 50px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(186, 218, 255, 0.6);
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.profile-header-search:focus {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: #1e3a8a;
+  box-shadow: 0 8px 30px rgba(30, 58, 138, 0.15);
+}
+
+/* --- Uplifted Add Button --- */
+.header-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #0e345d;
+  border: 1px solid rgba(186, 218, 255, 0.5);
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 10px 20px -5px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.header-add-btn:hover {
+  transform: translateY(-2px);
+  background: #0e345d;
+  color: #ffffff;
+  box-shadow: 0 15px 30px -10px rgba(30, 58, 138, 0.35);
+}
+
+/* --- Uplifted Profile Card --- */
+.profile-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #ffffff;
+  padding: 6px;
+  padding-right: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 10px 20px -5px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-header-profile:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #018ee8 0%, #018ee8 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 18px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+}
+
+/* Status Indicator Dot */
+.profile-header-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  background: #22c55e;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.profile-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.profile-header-email {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Administrator Tag */
+.profile-header-info::after {
+  content: 'Administrator';
+  font-size: 9px;
+  text-transform: uppercase;
+  color: #1e3a8a;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  margin-top: 3px;
+}
+
+/* ================= HEADER: SMALL PHONES (≤480px) ================= */
+@media (max-width: 480px) {
+
+  /* Keep header in one row */
+  .profile-header-container {
+    margin-top: 85px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  /* Only left actions visible */
+  .header-left-actions {
+    width: 100%;
+    gap: 8px;
+  }
+
+  /* Hide profile section */
+  .profile-header-profile {
+    display: none;
+  }
+
+  /* Search shrinks */
+  .search-wrapper {
+    width: 100%;
+    flex: 1;
+  }
+
+  .search-wrapper:focus-within {
+    width: 100%;
+  }
+
+  /* Smaller input */
+  .profile-header-search {
+    font-size: 12px;
+    padding: 10px 14px 10px 40px;
+    border-radius: 12px;
+  }
+
+  /* Compact add button */
+  .header-add-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+}
+
+/* Action Buttons Container */
+.header-action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* All Action Buttons Same Premium Style */
+.header-add-btn,
+.header-batch-btn,
+.header-shipment-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #0e345d;
+  border: 1px solid rgba(186, 218, 255, 0.5);
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 10px 20px -5px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover Effect Same As Old Add Button */
+.header-add-btn:hover,
+.header-batch-btn:hover,
+.header-shipment-btn:hover {
+  transform: translateY(-2px);
+  background: #0e345d;
+  color: #ffffff;
+  box-shadow: 0 15px 30px -10px rgba(30, 58, 138, 0.35);
+}

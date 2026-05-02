@@ -1,0 +1,132 @@
+.create-ship-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.create-ship-modal-container {
+    width: 480px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: createShipFade 0.25s ease;
+}
+
+@keyframes createShipFade {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.create-ship-modal-title {
+    margin-bottom: 20px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.create-ship-modal-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.create-ship-modal-field label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+.create-ship-modal-field input,
+.create-ship-modal-field select {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(186, 218, 255, 0.7);
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.create-ship-modal-field input:focus,
+.create-ship-modal-field select:focus {
+    border-color: #1e3a8a;
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.15);
+}
+
+.create-ship-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.create-ship-modal-cancel {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    cursor: pointer;
+}
+
+.create-ship-modal-submit {
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: #0e345d;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.create-ship-modal-submit:hover {
+    background: #08243f;
+}
+
+.create-ship-modal-toast {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 10px 18px;
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 0.5px solid #22c55e;
+
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 500;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    animation: toastFade 0.25s ease;
+}
+
+@keyframes toastFade {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}

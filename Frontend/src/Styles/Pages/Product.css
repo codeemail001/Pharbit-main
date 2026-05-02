@@ -1,0 +1,596 @@
+/* Container & Layout */
+.inventory-view {
+  padding: 40px;
+  max-width: 1250px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inventory-glass-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 32px;
+  box-shadow:
+    0 4px 24px -1px rgba(0, 0, 0, 0.02),
+    0 25px 50px -12px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Refinement */
+.inventory-top-bar {
+  padding: 30px 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.title-area h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+.count-chip {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e3a8a;
+  background: #ffffff;
+  padding: 8px 18px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(30, 58, 138, 0.15);
+}
+
+/* Modern Table Aesthetic */
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table th {
+  padding: 18px 45px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #64748b;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.modern-table td {
+  padding: 22px 45px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+/* Row Hover Lift */
+.modern-table tr {
+  transition: all 0.3s ease;
+}
+
+.modern-table tr:hover td {
+  background: rgba(255, 255, 255, 0.6);
+  color: #000;
+}
+
+.modern-table tr:hover {
+  transform: scale(1.002);
+}
+
+/* Text Styling */
+.med-identity .m-name {
+  display: block;
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.med-identity .m-code {
+  font-size: 11px;
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.m-brand {
+  color: #475569;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.m-tag {
+  background: #f1f5f9;
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Status Badges */
+.m-status {
+  display: inline-flex;
+  padding: 5px 14px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.is-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.is-wait {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+/* View Button */
+.view-link {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.view-link:hover {
+  border-color: #0e345d;
+  color: #0e345d;
+  box-shadow: 0 4px 12px #0e345d56;
+  transform: translateY(-1px);
+}
+
+/* Sliding Pagination Footer */
+.pagination-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 45px;
+  background: rgba(255, 255, 255, 0.4);
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.page-info {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 5px;
+  border-radius: 14px;
+}
+
+.num-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.num-btn.active {
+  background: #ffffff;
+  color: #1e3a8a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.pag-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #475569;
+  transition: all 0.2s;
+}
+
+.pag-btn:hover:not(:disabled) {
+  border-color: #1e3a8a;
+  color: #1e3a8a;
+  background: #f8fafc;
+}
+
+.pag-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+
+/* --- Header Meta & Sort Container --- */
+.header-meta {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sort-dropdown-container {
+  position: relative;
+}
+
+/* --- The Sort Trigger Button --- */
+.sort-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: #ffffff;
+  /* Matching your slim blue border theme */
+  border: 1px solid rgba(186, 218, 255, 0.6);
+  border-radius: 14px;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sort-trigger-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #1e3a8a;
+}
+
+.sort-trigger-btn .rotate {
+  transform: rotate(180deg);
+}
+
+.sort-trigger-btn svg {
+  transition: transform 0.3s ease;
+  color: #64748b;
+}
+
+/* --- The Floating Glass Dropdown --- */
+.sort-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  z-index: 9999;
+  animation: dropdownSlide 0.3s ease-out;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 8px 0 8px 8px;
+}
+
+.menu-section button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-section button:hover {
+  background: rgba(30, 58, 138, 0.08);
+  color: #1e3a8a;
+}
+
+/* Highlight for currently selected Filter/Sort */
+.menu-section button.active {
+  background: #1e3a8a;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+}
+
+.menu-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  margin: 10px 8px;
+}
+
+/* --- Table Enhancements --- */
+.fade-in-row {
+  animation: rowIn 0.4s ease forwards;
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.empty-msg {
+  padding: 60px 0;
+  text-align: center;
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* Status specific colors */
+.is-ok {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+/* Approved */
+.is-wait {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+/* Pending */
+.is-rejected {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Rejected */
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+
+  .inventory-view {
+    padding: 24px;
+  }
+
+  .inventory-top-bar {
+    padding: 20px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .modern-table th,
+  .modern-table td {
+    padding: 14px 20px;
+  }
+
+  .pagination-footer {
+    padding: 18px 24px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+}
+
+
+/* ================= MOBILE GRID TRANSFORMATION (2x2) ================= */
+/* ================= TIGHT COMPACT MOBILE GRID (2x2) ================= */
+
+@media (max-width: 480px) {
+
+
+
+  /* Top Bar - Mobile Single Line */
+  .inventory-top-bar {
+    display: flex;
+    flex-direction: row !important;
+    /* Force horizontal */
+    justify-content: space-between;
+    /* Push apart */
+    align-items: center;
+    padding: 14px 10px;
+    gap: 10px;
+  }
+
+  /* Title smaller for mobile */
+  .title-area h1 {
+    font-size: 18px;
+  }
+
+  /* If count chip exists next to title */
+  .count-chip {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 10px;
+  }
+
+  /* Filter / Sort Button */
+  .sort-trigger-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .inventory-view {
+    max-width: 700px;
+    padding: 10px;
+  }
+
+  .inventory-glass-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* 1. Tighten the Grid */
+  .modern-table tbody {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    /* Smaller gap between cards */
+  }
+
+  .modern-table thead {
+    display: none;
+  }
+
+  /* 2. Shrink the Card Container */
+  .modern-table tr {
+
+    width: 90%;
+    max-width: 90%;
+    display: flex !important;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 12px;
+    /* Reduced from 20px */
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    min-height: auto;
+    /* Allow it to shrink */
+  }
+
+  /* 3. Global Cell Shrink */
+  .modern-table td {
+    padding: 2px 0 !important;
+    /* Minimal vertical space */
+    min-height: unset;
+  }
+
+  /* 4. Identity Section (Name & Code) */
+  .modern-table td:first-child {
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 6px;
+    padding-bottom: 6px !important;
+  }
+
+  .med-identity .m-name {
+    font-size: 13px;
+    /* Smaller font */
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .med-identity .m-code {
+    font-size: 9px;
+    margin-top: 2px;
+  }
+
+  /* 5. Pricing & Labels */
+  /* If you have price in a data-label, make it inline */
+  .modern-table td::before {
+    font-size: 8px;
+    /* Tiny labels */
+    margin-bottom: 0;
+  }
+
+  .m-brand,
+  .m-tag {
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  /* 6. Compact Badges */
+  .m-status {
+    padding: 2px 6px;
+    font-size: 8px;
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+
+  /* 7. Action Button - Thin & Integrated */
+  .view-link {
+    margin-top: 8px;
+    padding: 6px;
+    font-size: 11px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Hide specific unnecessary data-labels on mobile to save height */
+  /* .modern-table td[data-label="Brand"]::before { display: none; } */
+}
+
+/* Extra Small Phones (Single Column if screen is tiny) */
+@media (max-width: 380px) {
+  .modern-table tbody {
+    grid-template-columns: 1fr;
+  }
+}

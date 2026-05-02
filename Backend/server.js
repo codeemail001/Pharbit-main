@@ -1,0 +1,70 @@
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+
+
+import Organization from "./Routes/Users/Organization.js"
+import Autherization from "./Routes/Users/Auth.js"
+import Employee from "./Routes/Users/Employee.js"
+import Medicines from "./Routes/Medicine/PostingMeds.js"
+import FetchMeds from "./Routes/Medicine/FetchingMeds.js"
+import MintMeds from "./Routes/Medicine/MintingMedicine.js"
+import Batches from "./Routes/Batches/FetchingBatch.js"
+import CreateShipment from "./Routes/Transfer/CreatingShipment.js"
+import FetchShipment from "./Routes/Transfer/GettingShipment.js"
+import PassShip from "./Routes/Transfer/PassingShipment.js"
+import RedeemShip from "./Routes/Transfer/RedeemShipment.js"
+import UpdateShip from "./Routes/Transfer/UpdatingShipment.js"
+import FreezeBatch from "./Routes/Batches/FreezingBatch.js"
+import PackageOrder from "./Routes/Batches/PackingOrder.js"
+import AdminControls from "./Routes/Admin/AdminControls.js"
+import Permissions from "./Routes/Users/Permissions.js"
+dotenv.config();
+
+const app = express();
+const PORT = 4500;
+
+app.use(cookieParser());
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+// Only parse JSON
+app.use(express.json({ type: "application/json" }));
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/", Organization);
+app.use("/", Autherization);
+app.use("/", Employee)
+app.use("/", Medicines);
+app.use("/", FetchMeds);
+app.use("/", MintMeds);
+app.use("/", Batches);
+app.use("/", CreateShipment);
+app.use("/", FetchShipment);
+app.use("/", PassShip);
+app.use("/", RedeemShip);
+app.use("/", UpdateShip);
+app.use("/", FreezeBatch);
+app.use("/", PackageOrder)
+app.use("/admin", AdminControls);
+app.use("/", Permissions);
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});

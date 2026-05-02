@@ -1,0 +1,578 @@
+/* ================= AUTH PAGE STYLES ================= */
+
+.auth-container {
+  /* Variables scoped only to this container */
+  --primary-yellow: #018fe84b;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --glass: rgba(255, 255, 255, 0.75);
+  --dark-text: #1f2933;
+
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  /* Premium radial background from your reference */
+  background: radial-gradient(circle at top right, #018fe8c5, #f1f5f9);
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+/* ================= LEFT SIDE (PHONE MOCKUP) ================= */
+
+.auth-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+}
+
+
+
+.phone-frame {
+  width: 100%;
+  
+  position: relative;
+  z-index: 2;
+  display: block;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+}
+
+/* 1. Ensure the container matches the image exactly */
+.phone-mockup {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+  display: flex;
+  /* Centers the image to the container */
+  justify-content: center;
+}
+
+/* 2. Image must be the master of dimensions */
+.phone-mockup img {
+  width: 100%;
+  height: auto;
+  /* Maintains aspect ratio */
+  display: block;
+  position: relative;
+  z-index: 2;
+  /* Keeps frame above background elements */
+}
+
+
+/* FLOATING CIRCLES */
+.circle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 10px 25px #022237;
+  animation: float 4s ease-in-out infinite;
+  z-index: 5;
+}
+
+.c1 {
+  top: 5%;
+  left: 15%;
+}
+
+.c2 {
+  top: 45%;
+  left: 10%;
+  animation-delay: 0.5s;
+}
+
+.c3 {
+  top: 15%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.c4 {
+  bottom: 10%;
+  right: 20%;
+  animation-delay: 1.5s;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* ================= RIGHT SIDE (GLASS CARD) ================= */
+
+.auth-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-card h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  /* Ultra light */
+  letter-spacing: 4px;
+  /* Wide spacing */
+  text-transform: uppercase;
+  /* Optional: looks very premium with spacing */
+  font-size: 22px;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* TOGGLE - PILL DESIGN */
+/* THE TOGGLE CONTAINER */
+.toggle {
+  display: flex;
+  position: relative;
+  /* Essential for the absolute blob */
+  background: rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  border-radius: 100px;
+  margin-bottom: 25px;
+  height: 48px;
+  /* Fixed height for consistent sliding */
+  z-index: 1;
+}
+
+/* THE SLIDING BLOB */
+.slider-blob {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  /* Half the width minus padding */
+  height: calc(100% - 10px);
+  background: white;
+  border-radius: 100px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Smooth spring-like movement */
+  z-index: -1;
+  /* Sits behind the button text */
+}
+
+/* BLOB POSITIONS */
+.slider-blob.left {
+  transform: translateX(0);
+}
+
+.slider-blob.right {
+  transform: translateX(100%);
+}
+
+/* BUTTONS */
+.toggle button {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  /* Force remove any inherited borders */
+  outline: none !important;
+  /* Removes the focus rectangle */
+  box-shadow: none !important;
+  /* Always transparent now */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: color 0.4s ease;
+  z-index: 2;
+  outline: none;
+}
+
+/* TEXT COLOR CHANGE WHEN ACTIVE */
+.toggle button.active {
+  color: var(--text-main);
+  /* Text turns dark when the white blob is behind it */
+}
+
+
+.toggle .active {
+  background: white;
+  color: var(--text-main);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* SIGNUP TYPE SWITCH */
+.signup-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.toggle-switch {
+  width: 44px;
+  height: 22px;
+  background: #e2e8f0;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-ball {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-switch.right {
+  background: var(--primary-yellow);
+}
+
+.toggle-switch.right .toggle-ball {
+  left: 25px;
+}
+
+/* FORM INPUTS - PILL SHAPED */
+.form-inner form input {
+  width: 100%;
+  padding: 14px 22px;
+  margin-bottom: 15px;
+  border-radius: 100px;
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-inner form input:focus {
+  outline: none;
+  border-color: var(--primary-yellow);
+  box-shadow: 0 0 0 4px rgba(1, 143, 232, 0.2);
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+
+  background: #018fe8e8;
+  /* very light yellow */
+  border: 2px solid var(--primary-yellow);
+
+  border-radius: 100px;
+
+  color: #000000;
+  /* dark amber text */
+
+  font-weight: 600;
+  font-size: 16px;
+
+  cursor: pointer;
+  margin-top: 10px;
+
+  box-shadow: none;
+
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: rgba(77, 162, 252, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(23, 117, 224, 0.25);
+}
+
+/* SOCIAL BUTTONS */
+.social-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.social-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+
+.auth-card form input {
+  width: 90%;
+  padding: 14px 22px;
+  margin-bottom: 15px;
+  border-radius: 100px;
+  /* THE PILL LOOK */
+  border: 1px solid #edf2f7;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+
+.auth-card form input:focus {
+  outline: none;
+  background: white;
+  border-color: var(--primary-yellow);
+  box-shadow: 0 0 0 4px rgba(1, 143, 232, 0.15);
+}
+
+/* SUBMIT BUTTON - WARM YELLOW */
+
+.auth-card form button {
+  width: 100%;
+  padding: 15px;
+
+  background: #018fe80d;
+  /* very light yellow */
+  border: 2px solid var(--primary-yellow);
+
+  border-radius: 100px;
+
+  color: #0e345d;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  cursor: pointer;
+  margin-top: 10px;
+
+  box-shadow: none;
+
+  transition: all 0.3s ease;
+}
+
+
+.auth-card form button:hover {
+  background: #018fe859;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px #018fe86e;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .auth-left {
+    display: none;
+  }
+
+  .auth-right {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+
+/* ================= UPDATED RESPONSIVE DESIGN ================= */
+
+/* TABLET LAYOUT (Same layout, just scaled down) */
+@media (max-width: 1200px) {
+  .auth-left {
+    flex: 1;
+    /* Give more room to the form */
+  }
+
+  .phone-mockup {
+    max-width: 500px;
+    /* Scale down the phone image */
+  }
+
+  .auth-card {
+    max-width: 400px;
+    /* Slimmer card for tablets */
+    padding: 30px;
+  }
+}
+
+/* SMALL TABLET / LARGE PHONE BREAKPOINT */
+@media (max-width: 992px) {
+  .auth-container {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .phone-mockup {
+    max-width: 400px;
+  }
+
+  .circle {
+    width: 45px;
+    /* Smaller floating icons */
+    height: 45px;
+    font-size: 18px;
+  }
+}
+
+/* MOBILE VIEW (Phones) */
+@media (max-width: 768px) {
+  .auth-container {
+    /* Background adjustment for a cleaner mobile look */
+    background: radial-gradient(circle at top right, #018fe8c5, #f1f5f9);
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    /* Allow scrolling if keyboard pops up */
+  }
+
+  .auth-left {
+    display: none;
+    /* Hide phone mockup on mobile as requested */
+  }
+
+  .auth-right {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 100%;
+    /* Take full width minus padding */
+    border-radius: 30px;
+    /* Slightly less rounded for small screens */
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  }
+
+  .auth-card h2 {
+    font-size: 22px;
+  }
+
+  /* Fix for the 80% input width in your current code */
+  .auth-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .auth-card form input {
+    width: 80% !important;
+    /* Forces inputs to be full width on mobile */
+  }
+
+  .social-btns {
+    flex-direction: column;
+    /* Stack Apple/Google buttons on small phones */
+    gap: 10px;
+  }
+}
+
+/* LANDSCAPE FIX (For phones held sideways) */
+@media (max-height: 500px) and (max-width: 900px) {
+  .auth-container {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .auth-left {
+    display: none;
+  }
+}
+
+/* TOAST GLASSMORPHISM STYLE */
+.custom-toast {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  color: #1e293b !important;
+  border-radius: 100px !important;
+  /* Pill shape to match your inputs */
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  padding: 12px 24px !important;
+}
+
+/* Specific icon colors */
+.custom-toast [role="status"] {
+  margin-right: 12px;
+}
+
+/* Animation refinement */
+@keyframes toastFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-toast {
+  animation: toastFadeIn 0.3s ease-out;
+}

@@ -1,0 +1,404 @@
+/* --- Deep Glass Overlay --- */
+.dashboard-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Container --- */
+.dashboard-modal-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  padding: 32px;
+  border-radius: 28px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- Header & Status Tags --- */
+.dashboard-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.modal-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-modal-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.modal-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.dashboard-modal-brand {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.separator {
+  color: #cbd5e1;
+}
+
+.dashboard-modal-code {
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* Status Badges */
+.status-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-tag.approved {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #10b98133;
+}
+
+.status-tag.pending {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid #f59e0b33;
+}
+
+/* --- Grid & Cards --- */
+.dashboard-modal-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dashboard-modal-info-card {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.blue-icon {
+  color: #3b82f6;
+}
+
+.dashboard-modal-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-modal-price {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+}
+
+/* --- Tags & Lists --- */
+.modal-section {
+  margin-bottom: 24px;
+}
+
+.dashboard-modal-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.dashboard-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dashboard-modal-tag {
+  background: #f1f5f9;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.dashboard-modal-list {
+  padding-left: 18px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- Warning Box --- */
+.dashboard-modal-warning {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.warning-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b91c1c;
+  margin-bottom: 8px;
+}
+
+.dashboard-modal-warning-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.dashboard-modal-warning-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  color: #991b1b;
+}
+
+/* --- Actions & Footer --- */
+.dashboard-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.mint-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.mint-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.dashboard-modal-close-btn {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dashboard-modal-close-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dashboard-modal-footer-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* =========================
+   Mint Form Container
+========================= */
+
+.mint-form {
+  margin-top: 28px;
+  padding: 22px;
+
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  animation: fadeMintForm 0.25s ease;
+}
+
+@keyframes fadeMintForm {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   Title
+========================= */
+
+.mint-form h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+/* =========================
+   Inputs
+========================= */
+
+.mint-form input {
+  padding: 10px 12px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+
+  font-size: 14px;
+  background: rgba(255,255,255,0.85);
+
+  transition: all 0.15s ease;
+}
+
+.mint-form input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22,163,74,0.15);
+}
+
+/* =========================
+   File Upload
+========================= */
+
+.mint-form input[type="file"] {
+  background: rgba(240,240,240,0.6);
+  cursor: pointer;
+}
+
+/* =========================
+   Submit Button
+========================= */
+
+.mint-submit-btn {
+  margin-top: 6px;
+
+  padding: 11px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg,#16a34a,#15803d);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.mint-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.mint-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+
+  .mint-form {
+    padding: 18px;
+  }
+
+  .mint-form input {
+    font-size: 13px;
+  }
+
+}

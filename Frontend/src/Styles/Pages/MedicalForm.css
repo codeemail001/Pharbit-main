@@ -1,0 +1,503 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap');
+
+.medicine-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: #1e293b;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+.medicine-page * {
+  box-sizing: border-box;
+}
+
+.page-header {
+  max-width: 1300px;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.header-content h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+}
+
+.header-content p {
+  color: #64748b;
+  margin: 0;
+}
+
+.step-wizard {
+  display: flex;
+  gap: 40px;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.step-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+.step-item.active .step-number {
+  background: #018ee8;
+  border-color: #0e345d;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.step-item.active .step-label {
+  color: #2563eb;
+}
+
+.step-item.completed .step-number {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+/* ================= LAYOUT ================= */
+.medicine-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 30px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.medicine-form-container {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #eef2f6;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-step-content {
+  flex: 1;
+}
+
+.anim-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= SECTIONS & FIELDS ================= */
+.form-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  color: #2563eb;
+}
+
+.section-title h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #475569;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  transition: 0.2s;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+
+.array-row {
+  display: flex;
+  gap: 10px;
+}
+
+.add-tag-btn {
+  padding: 0 20px;
+  background: #0e345d;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.form-tag {
+  background: #eff6ff;
+  color: #1e40af;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dbeafe;
+}
+
+.form-tag button {
+  background: none;
+  border: none;
+  color: #1e40af;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+/* ================= NAVIGATION BUTTONS ================= */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.nav-btn-primary,
+.nav-btn-submit {
+  background: #018ee8;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: auto;
+}
+
+.nav-btn-secondary {
+  background: white;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.nav-btn-primary:hover,
+.nav-btn-submit:hover {
+  background: #0e345d;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
+
+/* ================= PREVIEW CARD (STICKY) ================= */
+.medicine-preview-sticky {
+  position: sticky;
+  top: 40px;
+  height: fit-content;
+}
+
+.preview-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.preview-card-header {
+  background: #0e345d;
+  padding: 24px;
+  color: white;
+}
+
+.preview-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  font-weight: 700;
+}
+
+.preview-card-header h3 {
+  margin: 8px 0 4px;
+  font-size: 22px;
+}
+
+.preview-card-header p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.preview-body {
+  padding: 24px;
+}
+
+.preview-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.preview-row span {
+  color: #64748b;
+}
+
+.preview-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.preview-tag-pill {
+  background: #f1f5f9;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.preview-footer {
+  padding: 20px 24px;
+  background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #018ee8;
+  margin: 0;
+}
+
+.preview-status {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f59e0b;
+  text-transform: uppercase;
+}
+
+/* ================= UPLOAD BOX ================= */
+.upload-box {
+  border: 2px dashed #e2e8f0;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  color: #64748b;
+  position: relative;
+  transition: 0.2s;
+}
+
+.upload-box:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.upload-box input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+
+
+
+
+/* ================= MEDICINE FORM: MOBILE (≤480px) ================= */
+@media (max-width: 480px) {
+
+  /* Page Padding */
+  .medicine-page {
+    margin-top: 80px;
+    padding: 16px 12px;
+  }
+
+  /* Header Stack */
+  .page-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .header-content h1 {
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .header-content p {
+    text-align: center;
+  }
+
+  /* Hide Step Labels (Keep Circles) */
+  .step-label {
+    display: none;
+  }
+
+  .step-wizard {
+    gap: 20px;
+  }
+
+  /* Single Column Layout */
+  .medicine-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Hide Preview on Mobile */
+  .medicine-preview-sticky {
+    display: none;
+  }
+
+  /* Form Container */
+  .medicine-form-container {
+    padding: 20px;
+    border-radius: 20px;
+    min-height: auto;
+  }
+
+  /* Form Grid → Stack */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
+
+  /* Inputs */
+  .field input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  /* Tags Input */
+  .array-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .add-tag-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Navigation Buttons */
+  .form-navigation {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .nav-btn-primary,
+  .nav-btn-secondary,
+  .nav-btn-submit {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  /* Upload Box */
+  .upload-box {
+    padding: 20px;
+    font-size: 13px;
+  }
+
+  /* Preview Pills (if reused) */
+  .preview-tag-pill {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}
