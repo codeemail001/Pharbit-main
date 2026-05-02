@@ -1,4 +1,5 @@
 import express from "express";
+console.log("🚀 FILE LOADED: Auth.js is being executed!");
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -72,6 +73,10 @@ app.get("/", (req, res) => {
 app.get("/health", (req, res) => {
   console.log("Health check hit at /health");
   res.json({ status: "ok", port: PORT, env: process.env.NODE_ENV });
+});
+
+app.get("/auth/manual-test", (req, res) => {
+  res.json({ message: "Manual Auth Test in server.js is working!" });
 });
 
 // --- PRIMARY ROUTERS (MUST BE BEFORE OTHERS) ---

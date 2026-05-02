@@ -1,10 +1,15 @@
 import express from "express";
+console.log("🚀 AUTH ROUTER FILE LOADED: Auth.js is being executed!");
 import supabase from "../../Middleware/Database/DatabaseConnect.js";
 import { createAuthUser } from "../../Database/Users/User/CreateUser.js";
 import { FindUser, getAuthUser } from "../../Middleware/Database/AuthUser.js";
 import { UserDetails } from "../../Database/Users/User/UserDetails.js";
 
 const router = express.Router();
+
+router.get("/auth/test", (req, res) => {
+  res.json({ message: "Auth Router is Active!" });
+});
 
 //User Login 
 router.post("/auth/login", async (req, res) => {
