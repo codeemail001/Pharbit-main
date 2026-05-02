@@ -67,13 +67,19 @@ app.use("/admin", AdminControls);
 app.use("/", Permissions);
 
 app.get("/", (req, res) => {
+  console.log("Health check hit at /");
   res.status(200).send("Pharbit API is running...");
 });
 
 app.get("/health", (req, res) => {
-  res.json({ status: "ok", message: "Pharbit API is live" });
+  console.log("Health check hit at /health");
+  res.json({ status: "ok", port: PORT, env: process.env.NODE_ENV });
 });
 
+console.log("Attempting to start server...");
+console.log("PORT:", PORT);
+console.log("NODE_ENV:", process.env.NODE_ENV);
+
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running at http://0.0.0.0:${PORT}`);
+  console.log(`🚀 Server strictly listening on 0.0.0.0:${PORT}`);
 });
