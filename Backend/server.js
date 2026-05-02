@@ -66,10 +66,14 @@ app.use("/", PackageOrder)
 app.use("/admin", AdminControls);
 app.use("/", Permissions);
 
+app.get("/", (req, res) => {
+  res.status(200).send("Pharbit API is running...");
+});
+
 app.get("/health", (req, res) => {
   res.json({ status: "ok", message: "Pharbit API is live" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
