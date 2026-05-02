@@ -13,8 +13,9 @@ process.on("unhandledRejection", (reason, promise) => {
 
 dotenv.config();
 
+// Imports
 import Organization from "./Routes/Users/Organization.js"
-import Authorization from "./Routes/Users/Auth.js"
+import AuthRouter from "./Routes/Users/Auth.js"
 import Employee from "./Routes/Users/Employee.js"
 import Medicines from "./Routes/Medicine/PostingMeds.js"
 import FetchMeds from "./Routes/Medicine/FetchingMeds.js"
@@ -31,7 +32,6 @@ import AdminControls from "./Routes/Admin/AdminControls.js"
 import Permissions from "./Routes/Users/Permissions.js"
 
 const app = express();
-// Force 4500 to match your Railway domain settings
 const PORT = process.env.NODE_ENV === "production" ? 4500 : (process.env.PORT || 4500);
 
 app.use(cookieParser());
@@ -41,7 +41,6 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:5174",
-  "https://pharbit.netlify.app", // Add your Netlify URL here
 ];
 
 app.use(cors({
@@ -75,13 +74,15 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", port: PORT, env: process.env.NODE_ENV });
 });
 
+// --- PRIMARY ROUTERS (MUST BE BEFORE OTHERS) ---
+console.log("DEBUG: Registering AuthRouter...");
+app.use("/", AuthRouter);
+
 console.log("Attempting to start server...");
 console.log("PORT:", PORT);
-console.log("NODE_ENV:", process.env.NODE_ENV);
 // ---------------------------------------
 
 app.use("/", Organization);
-app.use("/", Authorization);
 app.use("/", Employee)
 app.use("/", Medicines);
 app.use("/", FetchMeds);
