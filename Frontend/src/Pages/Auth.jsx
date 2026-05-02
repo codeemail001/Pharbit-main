@@ -64,6 +64,10 @@ export default function Auth() {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
+        
+        // Save token
+        if (data.token) localStorage.setItem("Pharbit_Token", data.token);
+
         toast.success("Login Successful!");
         setTimeout(() => {
           navigate("/");
@@ -82,6 +86,10 @@ export default function Auth() {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
+
+        // Save token
+        if (data.token) localStorage.setItem("Pharbit_Token", data.token);
+
         toast.success("Account created! Please login.");
         setIsLogin(true);
       } else {

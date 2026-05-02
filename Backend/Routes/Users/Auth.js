@@ -43,6 +43,7 @@ router.post("/auth/login", async (req, res) => {
 
     return res.status(200).json({
       message: "Login successful",
+      token: session.access_token,
       user: {
         id: user.id,
         email: user.email
@@ -110,6 +111,7 @@ router.post("/auth/signup", async (req, res) => {
 
     return res.status(201).json({
       message: "Signup successful",
+      token: loginData.session.access_token,
       user: {
         id: authUser.id,
         email: authUser.email,

@@ -18,7 +18,13 @@ const HomeSearch = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`${url}/auth/me`, { credentials: "include" });
+        const token = localStorage.getItem("Pharbit_Token");
+        const res = await fetch(`${url}/auth/me`, { 
+          credentials: "include",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
         const data = await res.json();
         if (data && data.employee) {
           setUser(data.employee);
@@ -43,8 +49,12 @@ const HomeSearch = () => {
   useEffect(() => {
     const fetchMeds = async () => {
       try {
+        const token = localStorage.getItem("Pharbit_Token");
         const res = await fetch(`${url}/allmeds`, {
-          credentials: 'include'
+          credentials: 'include',
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
         });
         const response = await res.json();
         if (response.success) {

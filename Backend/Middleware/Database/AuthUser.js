@@ -1,10 +1,12 @@
 import supabase from "./DatabaseConnect.js";
 
 export const getAuthUser = async (req) => {
-  const token = req.cookies?.Pharbit_Token;
+  const authHeader = req.headers.authorization;
+  const token = (authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null) || req.cookies?.Pharbit_Token;
+  
   console.log("Auth Check - Token Present:", !!token);
   if (!token) {
-    console.log("No token found in cookies. Available cookies:", Object.keys(req.cookies || {}));
+    console.log("No token found. Cookies:", Object.keys(req.cookies || {}));
     throw new Error("Unauthorized");
   }
   const { data, error } = await supabase.auth.getUser(token);
