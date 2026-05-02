@@ -23,7 +23,7 @@ import Permissions from "./Routes/Users/Permissions.js"
 dotenv.config();
 
 const app = express();
-const PORT = 4500;
+const PORT = process.env.PORT || 4500;
 
 app.use(cookieParser());
 
@@ -31,12 +31,13 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://127.0.0.1:5173",
-  "http://127.0.0.1:5174"
+  "http://127.0.0.1:5174",
+  "https://pharbit.netlify.app", // Add your Netlify URL here
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".netlify.app")) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
