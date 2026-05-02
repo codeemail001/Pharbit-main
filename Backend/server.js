@@ -49,6 +49,22 @@ app.use(cors({
 app.use(express.json({ type: "application/json" }));
 app.use(express.urlencoded({ extended: true }));
 
+// --- HEALTH CHECKS (MUST BE AT TOP) ---
+app.get("/", (req, res) => {
+  console.log("Health check hit at /");
+  res.status(200).send("Pharbit API is running...");
+});
+
+app.get("/health", (req, res) => {
+  console.log("Health check hit at /health");
+  res.json({ status: "ok", port: PORT, env: process.env.NODE_ENV });
+});
+
+console.log("Attempting to start server...");
+console.log("PORT:", PORT);
+console.log("NODE_ENV:", process.env.NODE_ENV);
+// ---------------------------------------
+
 app.use("/", Organization);
 app.use("/", Autherization);
 app.use("/", Employee)
@@ -65,20 +81,6 @@ app.use("/", FreezeBatch);
 app.use("/", PackageOrder)
 app.use("/admin", AdminControls);
 app.use("/", Permissions);
-
-app.get("/", (req, res) => {
-  console.log("Health check hit at /");
-  res.status(200).send("Pharbit API is running...");
-});
-
-app.get("/health", (req, res) => {
-  console.log("Health check hit at /health");
-  res.json({ status: "ok", port: PORT, env: process.env.NODE_ENV });
-});
-
-console.log("Attempting to start server...");
-console.log("PORT:", PORT);
-console.log("NODE_ENV:", process.env.NODE_ENV);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server strictly listening on 0.0.0.0:${PORT}`);
