@@ -1,5 +1,5 @@
 import supabase from "../../../../Middleware/Database/DatabaseConnect.js";
-import { uploadFiles } from "./uploadfiles.js";
+import { uploadFiles } from "./uploadFiles.js";
 
 export async function createMedicine(data, orgId, files) {
   try {
