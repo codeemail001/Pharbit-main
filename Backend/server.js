@@ -14,7 +14,7 @@ process.on("unhandledRejection", (reason, promise) => {
 dotenv.config();
 
 import Organization from "./Routes/Users/Organization.js"
-import Autherization from "./Routes/Users/Auth.js"
+import Authorization from "./Routes/Users/Auth.js"
 import Employee from "./Routes/Users/Employee.js"
 import Medicines from "./Routes/Medicine/PostingMeds.js"
 import FetchMeds from "./Routes/Medicine/FetchingMeds.js"
@@ -81,7 +81,7 @@ console.log("NODE_ENV:", process.env.NODE_ENV);
 // ---------------------------------------
 
 app.use("/", Organization);
-app.use("/", Autherization);
+app.use("/", Authorization);
 app.use("/", Employee)
 app.use("/", Medicines);
 app.use("/", FetchMeds);
